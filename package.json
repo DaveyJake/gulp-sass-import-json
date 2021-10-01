@@ -1,8 +1,9 @@
 {
   "name": "gulp-sass-import-json",
-  "version": "1.0.2",
+  "version": "2.0.0b",
   "main": "index.js",
   "author": "Renat Gafarov",
+  "contributor": "Davey Jacobson",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/acusticdemon/gulp-sass-import-json.git"
