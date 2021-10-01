@@ -1,6 +1,6 @@
 # gulp-sass-import-json
 
-Gulp plugin for sass
+Gulp 4 plugin for sass
 
 ## Install
 ```bash
