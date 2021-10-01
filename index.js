@@ -1,7 +1,8 @@
 'use strict';
 
 const fs          = require('fs');
-const gutil       = require('gulp-util');
+const { Buffer }  = require('buffer');
+const PluginError = require('plugin-error');
 const through     = require('through2');
 const path        = require('path');
 
@@ -11,8 +12,9 @@ const importJsonRx = /@import\s*['"]?(.*?\.json)['"]?/gi;
 const jsonCache = {};
 
 /**
- * @param {Object|null} options
- * @property {Boolean} [options.isScss=false]
+ * @param    {Object|null} options
+ * @property {Boolean}     [options.isScss=false]
+ *
  * @returns {*}
  */
 module.exports = function (options) {
@@ -24,7 +26,7 @@ module.exports = function (options) {
         }
 
         if (file.isStream()) {
-            cb(new gutil.PluginError('gulp-sass-import-json', 'Streaming not supported'));
+            cb(new PluginError('gulp-sass-import-json', 'Streaming not supported'));
             return;
         }
 
@@ -52,11 +54,11 @@ module.exports = function (options) {
                 return compiledJsonContent;
             });
 
-            file.contents = new Buffer(contentWithImports);
+            file.contents = new Buffer.from(contentWithImports);
 
             this.push(file);
         } catch (err) {
-            this.emit('error', new gutil.PluginError('gulp-sass-import-json', err));
+            this.emit('error', new PluginError('gulp-sass-import-json', err));
         }
 
         cb();
